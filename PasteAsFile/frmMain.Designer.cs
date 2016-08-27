@@ -43,6 +43,7 @@
             this.lblMe = new System.Windows.Forms.Label();
             this.lblWebsite = new System.Windows.Forms.Label();
             this.lblHelp = new System.Windows.Forms.Label();
+            this.ChkSaveButton = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.imgContent)).BeginInit();
             this.SuspendLayout();
             // 
@@ -77,7 +78,7 @@
             this.lblFileName.AutoSize = true;
             this.lblFileName.Location = new System.Drawing.Point(13, 13);
             this.lblFileName.Name = "lblFileName";
-            this.lblFileName.Size = new System.Drawing.Size(56, 13);
+            this.lblFileName.Size = new System.Drawing.Size(55, 13);
             this.lblFileName.TabIndex = 4;
             this.lblFileName.Text = "Filename :";
             // 
@@ -93,7 +94,7 @@
             this.lblExt.AutoSize = true;
             this.lblExt.Location = new System.Drawing.Point(234, 13);
             this.lblExt.Name = "lblExt";
-            this.lblExt.Size = new System.Drawing.Size(61, 13);
+            this.lblExt.Size = new System.Drawing.Size(59, 13);
             this.lblExt.TabIndex = 6;
             this.lblExt.Text = "Extension :";
             // 
@@ -127,7 +128,7 @@
             this.btnSave.Location = new System.Drawing.Point(108, 95);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(135, 30);
-            this.btnSave.TabIndex = 8;
+            this.btnSave.TabIndex = 0;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
@@ -145,7 +146,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(13, 55);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(94, 13);
+            this.label1.Size = new System.Drawing.Size(91, 13);
             this.label1.TabIndex = 9;
             this.label1.Text = "Current Location :";
             // 
@@ -165,7 +166,7 @@
             this.lblMe.ForeColor = System.Drawing.Color.Gray;
             this.lblMe.Location = new System.Drawing.Point(200, 134);
             this.lblMe.Name = "lblMe";
-            this.lblMe.Size = new System.Drawing.Size(122, 13);
+            this.lblMe.Size = new System.Drawing.Size(123, 13);
             this.lblMe.TabIndex = 12;
             this.lblMe.Text = "© Eslam Hamouda 2014";
             this.lblMe.Click += new System.EventHandler(this.lblMe_Click);
@@ -176,7 +177,7 @@
             this.lblWebsite.ForeColor = System.Drawing.Color.Gray;
             this.lblWebsite.Location = new System.Drawing.Point(12, 134);
             this.lblWebsite.Name = "lblWebsite";
-            this.lblWebsite.Size = new System.Drawing.Size(63, 13);
+            this.lblWebsite.Size = new System.Drawing.Size(62, 13);
             this.lblWebsite.TabIndex = 13;
             this.lblWebsite.Text = "eslamx.com";
             this.lblWebsite.Click += new System.EventHandler(this.lblWebsite_Click);
@@ -193,11 +194,23 @@
             this.lblHelp.Text = "?";
             this.lblHelp.Click += new System.EventHandler(this.lblHelp_Click);
             // 
+            // ChkSaveButton
+            // 
+            this.ChkSaveButton.AutoSize = true;
+            this.ChkSaveButton.Location = new System.Drawing.Point(16, 159);
+            this.ChkSaveButton.Name = "ChkSaveButton";
+            this.ChkSaveButton.Size = new System.Drawing.Size(321, 17);
+            this.ChkSaveButton.TabIndex = 15;
+            this.ChkSaveButton.Text = "Do not show dialog box, just save text/image as date filename.";
+            this.ChkSaveButton.UseVisualStyleBackColor = true;
+            this.ChkSaveButton.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(334, 156);
+            this.ClientSize = new System.Drawing.Size(334, 183);
+            this.Controls.Add(this.ChkSaveButton);
             this.Controls.Add(this.lblHelp);
             this.Controls.Add(this.lblWebsite);
             this.Controls.Add(this.lblMe);
@@ -241,6 +254,7 @@
         private System.Windows.Forms.Label lblMe;
         private System.Windows.Forms.Label lblWebsite;
         private System.Windows.Forms.Label lblHelp;
+        private System.Windows.Forms.CheckBox ChkSaveButton;
     }
 }
 

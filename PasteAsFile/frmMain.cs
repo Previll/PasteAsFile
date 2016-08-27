@@ -19,19 +19,24 @@ namespace PasteAsFile
     {
         public string CurrentLocation { get; set; }
         public bool IsText { get; set; }
+        private bool NoArgumentsPassedAtStartup = true;
         public frmMain()
         {
             InitializeComponent();
         }
         public frmMain(string location)
         {
+            NoArgumentsPassedAtStartup = false;
             InitializeComponent();
             this.CurrentLocation = location;
+            
         }
         private void frmMain_Load(object sender, EventArgs e)
         {
             txtFilename.Text = DateTime.Now.ToString("dd-MM-yyyy HH-mm");
             txtCurrentLocation.Text = CurrentLocation ?? @"C:\";
+
+            ChkSaveButton.Checked = Properties.Settings.Default.AutoSaveOnPaste;
 
             if (Registry.GetValue(@"HKEY_CLASSES_ROOT\Directory\Background\shell\Paste As File\command", "", null) == null)
             {
@@ -40,6 +45,7 @@ namespace PasteAsFile
                     Program.RegisterApp();
                 }
             }
+            
 
             if (Clipboard.ContainsText())
             {
@@ -47,6 +53,12 @@ namespace PasteAsFile
                 comExt.SelectedItem = "txt";
                 IsText = true;
                 txtContent.Text = Clipboard.GetText();
+
+                if (isAutoSaveEnabled())
+                {
+                    btnSave_Click(null, null);
+                };
+                
                 return;
             }
 
@@ -55,6 +67,13 @@ namespace PasteAsFile
                 lblType.Text = "Image";
                 comExt.SelectedItem = "png";
                 imgContent.Image = Clipboard.GetImage();
+
+                if (isAutoSaveEnabled())
+                {
+                    this.Visible = false;
+                    btnSave_Click(null,null);
+                };
+
                 return;
             }
 
@@ -63,7 +82,25 @@ namespace PasteAsFile
             
             
         }
+        
+        private bool isAutoSaveEnabled()
+        {
 
+            // if the user hasn't passed any arguments, then we want to display the main program
+            // even if they have something inside their clipboard, so first we check that they have not 
+            // started this program directly.
+
+            if (NoArgumentsPassedAtStartup)
+            {
+                return false;
+            }
+
+            // the user started the program from the right click context, so now we return if they
+            // enabled AutoSaveOnPaste
+            return Properties.Settings.Default.AutoSaveOnPaste;
+        }
+
+        
         private void btnSave_Click(object sender, EventArgs e)
         {
             string location = txtCurrentLocation.Text;
@@ -139,6 +176,15 @@ namespace PasteAsFile
 
 
            
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
+            Properties.Settings.Default.AutoSaveOnPaste = ChkSaveButton.Checked;
+            Properties.Settings.Default.Save();
+
+
         }
     }
 }
